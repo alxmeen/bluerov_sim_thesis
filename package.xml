@@ -10,10 +10,13 @@
 
     <buildtool_depend>catkin</buildtool_depend>
 
+    <depend>message_generation</depend>
+    <depend>message_runtime</depend>
     <depend>gazebo_ros</depend>
     <depend>gazebo_plugins</depend>
     <depend>roscpp</depend>
     <depend>python-pygame</depend>
+    <depend>std_msgs</depend>
 
     <!-- <exec_depend>gazebo_ros</exec_depend> -->
 

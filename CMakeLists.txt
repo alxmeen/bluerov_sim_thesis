@@ -6,6 +6,8 @@ find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
   gazebo_plugins
   roscpp
+  std_msgs
+  message_generation
 )
 
 add_compile_options(-std=c++14)
@@ -14,8 +16,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 
 find_package(gazebo REQUIRED)
 
-link_directories(${GAZEBO_LIBRARY_DIRS})
+add_message_files(
+    FILES
+    ActuatorCommands.msg
+)
 
+generate_messages(
+    DEPENDENCIES
+    std_msgs
+)
+
+link_directories(${GAZEBO_LIBRARY_DIRS})
 
 include_directories(include ${catkin_INCLUDE_DIRS}
                             ${GAZEBO_INCLUDE_DIRS}
@@ -25,5 +36,7 @@ catkin_package(
 #  INCLUDE_DIRS include
   DEPENDS 
       roscpp 
-      gazebo_ros 
+      gazebo_ros
+  CATKIN_DEPENDS 
+    message_runtime
 )

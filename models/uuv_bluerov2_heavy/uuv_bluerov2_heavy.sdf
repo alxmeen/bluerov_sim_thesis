@@ -202,7 +202,7 @@
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100</maxRotVelocity>
             <motorConstant>-10</motorConstant>
-            <momentConstant>0.01</momentConstant>
+            <momentConstant>-0.01</momentConstant>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
@@ -262,7 +262,7 @@
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100</maxRotVelocity>
             <motorConstant>-10</motorConstant>
-            <momentConstant>0.01</momentConstant>
+            <momentConstant>-0.01</momentConstant>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
@@ -382,7 +382,7 @@
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100</maxRotVelocity>
             <motorConstant>-10</motorConstant>
-            <momentConstant>0.01</momentConstant>
+            <momentConstant>-0.01</momentConstant>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
@@ -443,7 +443,7 @@
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100</maxRotVelocity>
             <motorConstant>-10</motorConstant>
-            <momentConstant>0.01</momentConstant>
+            <momentConstant>-0.01</momentConstant>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
@@ -532,13 +532,13 @@
             <baseLinkName>base_link</baseLinkName>
             <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
             <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular>
-            <dampingLinear>5.39 17.36 17.36</dampingLinear>
-            <dampingAngular>0.00114 0.007 0.007</dampingAngular>
+            <dampingLinear>5 5 5</dampingLinear>
+            <dampingAngular>0.1 0.1 0.1</dampingAngular>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
             <buoyancy>
                 <link_name>base_link</link_name>
-                <origin>0 0 0</origin>
-                <compensation>1</compensation>
+                <origin>0 0 0.01</origin>
+                <compensation>1.001</compensation>
                 <height_scale_limit>0.05</height_scale_limit>
             </buoyancy>
         </plugin>
