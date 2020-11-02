@@ -149,7 +149,9 @@ class KeyboardControlNode():
     def arm_vehicle(self):
         rospy.wait_for_service("mavros/cmd/arming")
         arm = rospy.ServiceProxy("mavros/cmd/arming", CommandBool)
-        arm(True)
+        while not arm(True).success:
+            rospy.logwarn_throttle(1, "Could not arm vehicle. Keep trying.")
+        rospy.loginfo("Armed successfully.")
 
     def disarm_vehicle(self):
         rospy.wait_for_service("mavros/cmd/arming")
