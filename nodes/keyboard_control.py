@@ -125,16 +125,16 @@ class KeyboardControlNode():
 
         self.thrust = 0.0
         self.thrust_stepsize = 0.1
-        self.thrust_scaler = 0.1
+        self.thrust_scaler = 0.4
         self.lateral_thrust = 0.0
         self.lateral_thrust_stepsize = 0.1
-        self.lateral_thrust_scaler = 0.1
+        self.lateral_thrust_scaler = 0.4
         self.vertical_thrust = 0.0
         self.vertical_thrust_stepsize = 0.1
-        self.vertical_thrust_scaler = 0.1
+        self.vertical_thrust_scaler = 0.4
         self.yaw_rate = 0.0
         self.yaw_rate_stepsize = 0.1
-        self.yaw_rate_scaler = 0.1
+        self.yaw_rate_scaler = 0.2
 
         # create GUI
         self.screen = self.init_display()
@@ -237,7 +237,7 @@ class KeyboardControlNode():
 
     def init_controls(self):
         controls = {
-            pygame.K_LEFT:
+            pygame.K_q:
             dict(
                 pressed=False,
                 changed=False,
@@ -245,7 +245,7 @@ class KeyboardControlNode():
                 pressed_callback=(lambda: self.set_yaw_rate(1)),
                 released_callback=(lambda: self.set_yaw_rate(0)),
             ),
-            pygame.K_RIGHT:
+            pygame.K_e:
             dict(
                 pressed=False,
                 changed=False,

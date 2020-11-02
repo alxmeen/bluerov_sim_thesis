@@ -530,8 +530,10 @@
         <plugin name="uuv_plugin" filename="libgazebo_uuv_plugin.so">
             <robotNamespace />
             <baseLinkName>base_link</baseLinkName>
-            <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
-            <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular>
+            <!-- <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
+            <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular> -->
+            <addedMassLinear>0 0 0</addedMassLinear>
+            <addedMassAngular>0.0 0.0 0.0</addedMassAngular>
             <dampingLinear>5 5 5</dampingLinear>
             <dampingAngular>0.1 0.1 0.1</dampingAngular>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
