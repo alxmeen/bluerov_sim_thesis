@@ -40,3 +40,7 @@ catkin_package(
   CATKIN_DEPENDS 
     message_runtime
 )
+
+add_library(gazebo_pressure_plugin plugins/gazebo_pressure_plugin.cpp)
+add_dependencies(gazebo_pressure_plugin ${catkin_EXPORTED_TARGETS})
+target_link_libraries(gazebo_pressure_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})

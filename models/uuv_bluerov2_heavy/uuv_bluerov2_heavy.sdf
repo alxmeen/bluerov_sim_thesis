@@ -31,6 +31,38 @@
 
         </link>
 
+        <link name="pressure_sensor_link">
+            <inertial>
+                <mass>0.001</mass>
+                <inertia>
+                    <ixx>1.0e-8</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>1.0e-8</iyy>
+                    <iyz>0</iyz>
+                    <izz>1.0e-8</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="pressure_sensor_joint" type="revolute">
+            <child>pressure_sensor_link</child>
+            <parent>base_link</parent>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <upper>0</upper>
+                    <lower>0</lower>
+                </limit>
+            </axis>
+        </joint>
+
+        <plugin name="magnetometer_plugin" filename="libgazebo_pressure_plugin.so">
+            <robotNamespace />
+            <pubRate>50</pubRate>
+            <noise>100.0</noise>
+        </plugin>
+
         <link name="thruster1">
             <pose>0.14 -0.10 0 0 1.570796 0.78539815</pose>
             <inertial>
@@ -71,25 +103,6 @@
             <parent>base_link</parent>
             <child>thruster1</child>
         </joint>
-
-        <plugin name="thruster1_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster1_joint</jointName>
-            <linkName>thruster1</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>10</motorConstant>
-            <momentConstant>0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>0</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
 
         <link name="thruster2">
             <pose>0.14 0.10 0 0 1.570796 -0.78539815</pose>
@@ -132,25 +145,6 @@
             <child>thruster2</child>
         </joint>
 
-        <plugin name="thruster2_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster2_joint</jointName>
-            <linkName>thruster2</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>10</motorConstant>
-            <momentConstant>0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>1</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/1</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
-
         <link name="thruster3">
             <pose>-0.14 -0.10 0 0 1.570796 2.356194</pose>
             <inertial>
@@ -191,25 +185,6 @@
             <parent>base_link</parent>
             <child>thruster3</child>
         </joint>
-
-        <plugin name="thruster3_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster3_joint</jointName>
-            <linkName>thruster3</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>2</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/2</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
 
         <link name="thruster4">
             <pose>-0.14 0.10 0 0 1.570796 -2.356194</pose>
@@ -252,25 +227,6 @@
             <child>thruster4</child>
         </joint>
 
-        <plugin name="thruster4_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster4_joint</jointName>
-            <linkName>thruster4</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>3</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/3</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
-
         <link name="thruster5">
             <pose>0.12 -0.22 0.06 0 0 0</pose>
             <inertial>
@@ -311,25 +267,6 @@
             <parent>base_link</parent>
             <child>thruster5</child>
         </joint>
-
-        <plugin name="thruster5_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster5_joint</jointName>
-            <linkName>thruster5</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>10</motorConstant>
-            <momentConstant>0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>4</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/4</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
 
         <link name="thruster6">
             <pose>0.12 0.22 0.06 0 0 0</pose>
@@ -372,26 +309,6 @@
             <child>thruster6</child>
         </joint>
 
-        <plugin name="thruster6_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster6_joint</jointName>
-            <linkName>thruster6</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>5</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/5</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
-
-
         <link name="thruster7">
             <pose>-0.12 -0.22 0.06 0 0 0</pose>
             <inertial>
@@ -432,25 +349,6 @@
             <parent>base_link</parent>
             <child>thruster7</child>
         </joint>
-
-        <plugin name="thruster7_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster7_joint</jointName>
-            <linkName>thruster7</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>6</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/6</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
 
         <link name="thruster8">
             <pose>-0.12 0.22 0.06 0 0 0</pose>
@@ -493,25 +391,6 @@
             <child>thruster8</child>
         </joint>
 
-        <plugin name="thruster8_model" filename="libgazebo_motor_model.so">
-            <robotNamespace />
-            <reversible>true</reversible>
-            <jointName>thruster8_joint</jointName>
-            <linkName>thruster8</linkName>
-            <turningDirection>ccw</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100</maxRotVelocity>
-            <motorConstant>10</motorConstant>
-            <momentConstant>0.01</momentConstant>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <motorNumber>7</motorNumber>
-            <motorSpeedPubTopic>/motor_speed/7</motorSpeedPubTopic>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-        </plugin>
-
         <plugin name="magnetometer_plugin" filename="libgazebo_magnetometer_plugin.so">
             <robotNamespace />
             <pubRate>100</pubRate>
@@ -543,6 +422,158 @@
                 <compensation>1.001</compensation>
                 <height_scale_limit>0.05</height_scale_limit>
             </buoyancy>
+        </plugin>
+
+        <plugin name="thruster1_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster1_joint</jointName>
+            <linkName>thruster1</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>0</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+        </plugin>
+
+        <plugin name="thruster2_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster2_joint</jointName>
+            <linkName>thruster2</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>1</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/1</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+        </plugin>
+
+        <plugin name="thruster3_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster3_joint</jointName>
+            <linkName>thruster3</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>-10</motorConstant>
+            <momentConstant>-0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>2</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/2</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+        </plugin>
+
+        <plugin name="thruster4_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster4_joint</jointName>
+            <linkName>thruster4</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>-10</motorConstant>
+            <momentConstant>-0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>3</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/3</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+        </plugin>
+
+        <plugin name="thruster5_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster5_joint</jointName>
+            <linkName>thruster5</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>4</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/4</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+        </plugin>
+
+        <plugin name="thruster6_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster6_joint</jointName>
+            <linkName>thruster6</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>-10</motorConstant>
+            <momentConstant>-0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>5</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/5</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+        </plugin>
+
+        <plugin name="thruster7_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster7_joint</jointName>
+            <linkName>thruster7</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>-10</motorConstant>
+            <momentConstant>-0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>6</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/6</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+        </plugin>
+
+        <plugin name="thruster8_model" filename="libgazebo_motor_model.so">
+            <robotNamespace />
+            <reversible>true</reversible>
+            <jointName>thruster8_joint</jointName>
+            <linkName>thruster8</linkName>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100</maxRotVelocity>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>7</motorNumber>
+            <motorSpeedPubTopic>/motor_speed/7</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
         </plugin>
 
         <plugin name="mavlink_interface" filename="libgazebo_mavlink_interface.so">
@@ -660,6 +691,17 @@
             <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
             <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
         </plugin>
+
+        <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>30.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>ground_truth/state</topicName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <frameName>map</frameName>
+            <xyzOffsets>0 0 0</xyzOffsets>
+            <rpyOffsets>0 0 0</rpyOffsets>
+          </plugin>
 
     </model>
 </sdf>
