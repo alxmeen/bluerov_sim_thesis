@@ -99,6 +99,7 @@ void PressurePlugin::OnUpdate(const common::UpdateInfo &) {
     msg.fluid_pressure += noise;
 
     pressure_pub_.publish(msg);
+    last_pub_time_ = current_time;
   }
 }
 }  // namespace gazebo
