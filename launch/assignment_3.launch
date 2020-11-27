@@ -1,0 +1,12 @@
+<launch>
+
+    <include file="$(find bluerov_sim)/launch/gazebo_base.launch"/>
+
+    <include file="$(find bluerov_sim)/launch/spawn_vehicle.launch">
+        <arg name="z" value="-0.2"/>
+    </include>
+
+    <include file="$(find bluerov_sim)/launch/spawn_tank.launch">
+    </include>
+
+</launch>
