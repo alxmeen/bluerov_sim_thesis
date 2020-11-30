@@ -38,7 +38,8 @@ namespace gazebo
         } else {
             max_angle_ = kDefaultFov/2.0;
             gzwarn << "[ranges_plugin] Using default viewing angle "
-                   << kDefaultFov << "\n"; } 
+                   << kDefaultFov << "\n";
+        } 
         if (sdf->HasElement("dropProb")) {
             drop_prob_ = sdf->GetElement("dropProb")->Get<double>();
         } else {
@@ -77,36 +78,28 @@ namespace gazebo
         common::Time current_time = world_->SimTime();
         double dt = (current_time - last_pub_time_).Double();
 
-        if (initialized_ == false) {
-            if (world_->ModelByName("apriltag_tank")->GetChildLink("tag_1::base_link")) {
+        if (!initialized_) {
+            auto model = world_->ModelByName("apriltag_tank");
+            if (model && model->GetChildLink("tag_1::base_link")) {
                 pos_tag_1_ = world_->ModelByName("apriltag_tank")->GetChildLink("tag_1::base_link")->RelativePose().Pos();
                 gzmsg << "[ranges plugin] Tag 1 Position found.\n";
-            } else {
-                gzwarn << "[ranges_plugin] Tag 1 Position not found.\n";
-            }
-            if (world_->ModelByName("apriltag_tank")->GetChildLink("tag_2::base_link")) {
+            } 
+            if (model && model->GetChildLink("tag_2::base_link")) {
                 pos_tag_2_ = world_->ModelByName("apriltag_tank")->GetChildLink("tag_2::base_link")->RelativePose().Pos();
                 gzmsg << "[ranges plugin] Tag 2 Position found.\n";
-            } else {
-                gzwarn << "[ranges_plugin] Tag 2 Position not found.\n";
-            }
-            if (world_->ModelByName("apriltag_tank")->GetChildLink("tag_3::base_link")) {
+            } 
+            if (model && model->GetChildLink("tag_3::base_link")) {
                 pos_tag_3_ = world_->ModelByName("apriltag_tank")->GetChildLink("tag_3::base_link")->RelativePose().Pos();
                 gzmsg << "[ranges plugin] Tag 3 Position found.\n";
-            } else {
-                gzwarn << "[ranges_plugin] Tag 3 Position not found.\n";
-            }
-            if (world_->ModelByName("apriltag_tank")->GetChildLink("tag_4::base_link")) {
+            } 
+            if (model && model->GetChildLink("tag_4::base_link")) {
                 pos_tag_4_ = world_->ModelByName("apriltag_tank")->GetChildLink("tag_4::base_link")->RelativePose().Pos();
                 gzmsg << "[ranges plugin] Tag 4 Position found.\n";
                 initialized_ = true;
-            } else {
-                gzwarn << "[ranges_plugin] Tag 4 Position not found.\n";
-            }
+            } 
         }
 
-        if (dt > 1.0 / pub_rate_ && initialized_ == true)
-        {
+        if ((dt > 1.0 / pub_rate_) && (initialized_)) {
             range_sensor::RangeMeasurementArray msg_array;
             msg_array.header.stamp = ros::Time::now();
             msg_array.header.frame_id = "map";
