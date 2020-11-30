@@ -17,6 +17,7 @@
     <depend>roscpp</depend>
     <depend>python-pygame</depend>
     <depend>std_msgs</depend>
+    <depend>range_sensor</depend>
 
     <!-- <exec_depend>gazebo_ros</exec_depend> -->
 
