@@ -58,7 +58,7 @@
         </joint>
 
         <link name="range_sensor_link">
-            <pose>0.3 0 0.05 0 0 0</pose>  <!-- Todo -->
+            <pose>0.2 0 0.1 0 0 0</pose>
             <inertial>
                 <mass>0.001</mass>
                 <inertia>
@@ -84,7 +84,7 @@
             </axis>
         </joint>
 
-        <plugin name="magnetometer_plugin" filename="libgazebo_pressure_plugin.so">
+        <plugin name="pressure_plugin" filename="libgazebo_pressure_plugin.so">
             <robotNamespace />
             <pubRate>50</pubRate>
             <noise>100.0</noise>
@@ -447,8 +447,6 @@
         <plugin name="uuv_plugin" filename="libgazebo_uuv_plugin.so">
             <robotNamespace />
             <baseLinkName>base_link</baseLinkName>
-            <!-- <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
-            <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular> -->
             <addedMassLinear>0 0 0</addedMassLinear>
             <addedMassAngular>0.0 0.0 0.0</addedMassAngular>
             <dampingLinear>7 7 7</dampingLinear>
