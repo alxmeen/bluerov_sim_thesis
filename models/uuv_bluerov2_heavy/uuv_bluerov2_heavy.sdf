@@ -94,7 +94,7 @@
             <robotNamespace />
             <pubRate>7.0</pubRate>
             <rangeNoiseStd>0.1</rangeNoiseStd>
-            <fov>100</fov>
+            <fovCamera>100</fovCamera>
             <viewingAngle>140</viewingAngle>
             <dropProb>0.05</dropProb>
             <maxDetectionDist>4.0</maxDetectionDist>
@@ -451,8 +451,8 @@
             <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular> -->
             <addedMassLinear>0 0 0</addedMassLinear>
             <addedMassAngular>0.0 0.0 0.0</addedMassAngular>
-            <dampingLinear>5 5 5</dampingLinear>
-            <dampingAngular>0.1 0.1 0.1</dampingAngular>
+            <dampingLinear>7 7 7</dampingLinear>
+            <dampingAngular>0.3 0.3 0.3</dampingAngular>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
             <buoyancy>
                 <link_name>base_link</link_name>
