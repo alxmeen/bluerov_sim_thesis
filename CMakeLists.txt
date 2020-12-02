@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   message_generation
+  range_sensor
 )
 
 add_compile_options(-std=c++14)
@@ -44,3 +45,8 @@ catkin_package(
 add_library(gazebo_pressure_plugin plugins/gazebo_pressure_plugin.cpp)
 add_dependencies(gazebo_pressure_plugin ${catkin_EXPORTED_TARGETS})
 target_link_libraries(gazebo_pressure_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+
+add_library(gazebo_range_sensor_plugin plugins/gazebo_range_sensor_plugin.cpp)
+add_dependencies(gazebo_range_sensor_plugin ${catkin_EXPORTED_TARGETS})
+target_link_libraries(gazebo_range_sensor_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+

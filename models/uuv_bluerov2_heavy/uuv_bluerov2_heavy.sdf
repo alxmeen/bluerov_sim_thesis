@@ -57,10 +57,48 @@
             </axis>
         </joint>
 
-        <plugin name="magnetometer_plugin" filename="libgazebo_pressure_plugin.so">
+        <link name="range_sensor_link">
+            <pose>0.2 0 0.1 0 0 0</pose>
+            <inertial>
+                <mass>0.001</mass>
+                <inertia>
+                    <ixx>1.0e-8</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>1.0e-8</iyy>
+                    <iyz>0</iyz>
+                    <izz>1.0e-8</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="range_sensor_joint" type="revolute">
+            <child>range_sensor_link</child>
+            <parent>base_link</parent>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <upper>0</upper>
+                    <lower>0</lower>
+                </limit>
+            </axis>
+        </joint>
+
+        <plugin name="pressure_plugin" filename="libgazebo_pressure_plugin.so">
             <robotNamespace />
             <pubRate>50</pubRate>
             <noise>100.0</noise>
+        </plugin>
+
+        <plugin name="range_sensor_plugin" filename="libgazebo_range_sensor_plugin.so">
+            <robotNamespace />
+            <pubRate>7.0</pubRate>
+            <rangeNoiseStd>0.1</rangeNoiseStd>
+            <fovCamera>100</fovCamera>
+            <viewingAngle>140</viewingAngle>
+            <dropProb>0.05</dropProb>
+            <maxDetectionDist>4.0</maxDetectionDist>
+            <distDropProbExponent>2.0</distDropProbExponent>
         </plugin>
 
         <link name="thruster1">
@@ -409,12 +447,10 @@
         <plugin name="uuv_plugin" filename="libgazebo_uuv_plugin.so">
             <robotNamespace />
             <baseLinkName>base_link</baseLinkName>
-            <!-- <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
-            <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular> -->
             <addedMassLinear>0 0 0</addedMassLinear>
             <addedMassAngular>0.0 0.0 0.0</addedMassAngular>
-            <dampingLinear>5 5 5</dampingLinear>
-            <dampingAngular>0.1 0.1 0.1</dampingAngular>
+            <dampingLinear>7 7 7</dampingLinear>
+            <dampingAngular>0.3 0.3 0.3</dampingAngular>
             <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
             <buoyancy>
                 <link_name>base_link</link_name>
