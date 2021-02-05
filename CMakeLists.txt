@@ -7,8 +7,9 @@ find_package(catkin REQUIRED COMPONENTS
   gazebo_plugins
   roscpp
   std_msgs
+  geometry_msgs
   message_generation
-  range_sensor
+  apriltag_ros
 )
 
 add_compile_options(-std=c++14)
@@ -20,11 +21,14 @@ find_package(gazebo REQUIRED)
 add_message_files(
     FILES
     ActuatorCommands.msg
+    RangeMeasurement.msg
+    RangeMeasurementArray.msg
 )
 
 generate_messages(
     DEPENDENCIES
     std_msgs
+    geometry_msgs
 )
 
 link_directories(${GAZEBO_LIBRARY_DIRS})
@@ -34,7 +38,7 @@ include_directories(include ${catkin_INCLUDE_DIRS}
                             ${Boost_INCLUDE_DIR})
 
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
   DEPENDS 
       roscpp 
       gazebo_ros
@@ -47,6 +51,6 @@ add_dependencies(gazebo_pressure_plugin ${catkin_EXPORTED_TARGETS})
 target_link_libraries(gazebo_pressure_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 add_library(gazebo_range_sensor_plugin plugins/gazebo_range_sensor_plugin.cpp)
-add_dependencies(gazebo_range_sensor_plugin ${catkin_EXPORTED_TARGETS})
+add_dependencies(gazebo_range_sensor_plugin ${catkin_EXPORTED_TARGETS} bluerov_sim_generate_messages_cpp)
 target_link_libraries(gazebo_range_sensor_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 

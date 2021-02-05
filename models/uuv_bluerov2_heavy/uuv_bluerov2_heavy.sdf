@@ -93,7 +93,7 @@
         <plugin name="range_sensor_plugin" filename="libgazebo_range_sensor_plugin.so">
             <robotNamespace />
             <pubRate>7.0</pubRate>
-            <rangeNoiseStd>0.1</rangeNoiseStd>
+            <rangeNoiseStd>0.05</rangeNoiseStd>
             <fovCamera>100</fovCamera>
             <viewingAngle>140</viewingAngle>
             <dropProb>0.05</dropProb>

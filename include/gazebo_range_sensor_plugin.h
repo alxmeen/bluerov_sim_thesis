@@ -1,6 +1,6 @@
 #pragma once
-#include <range_sensor/RangeMeasurement.h>
-#include <range_sensor/RangeMeasurementArray.h>
+#include <bluerov_sim/RangeMeasurement.h>
+#include <bluerov_sim/RangeMeasurementArray.h>
 #include <ros/ros.h>
 
 #include <gazebo/common/Plugin.hh>
@@ -28,7 +28,7 @@ class RangesPlugin : public ModelPlugin {
   virtual void Load(physics::ModelPtr model, sdf::ElementPtr sdf);
   virtual void OnUpdate(const common::UpdateInfo &);
   void getSdfParams(sdf::ElementPtr sdf);
-  range_sensor::RangeMeasurement GetRangeMsg(
+  bluerov_sim::RangeMeasurement GetRangeMsg(
       int id, ignition::math::Vector3d sensor_to_tag);
   bool IsDetected(ignition::math::Vector3d sensor_to_tag,
                   ignition::math::Vector3d body_x_axis);

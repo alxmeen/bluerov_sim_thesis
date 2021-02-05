@@ -91,7 +91,7 @@ void RangesPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf) {
   update_connection_ = event::Events::ConnectWorldUpdateBegin(
       boost::bind(&RangesPlugin::OnUpdate, this, _1));
 
-  ranges_pub_ = node_handle_->advertise<range_sensor::RangeMeasurementArray>(
+  ranges_pub_ = node_handle_->advertise<bluerov_sim::RangeMeasurementArray>(
       ranges_topic_, 1);
 
   initialized_ = false;
@@ -136,7 +136,7 @@ void RangesPlugin::OnUpdate(const common::UpdateInfo &) {
   }
 
   if ((dt > 1.0 / pub_rate_) && (initialized_)) {
-    range_sensor::RangeMeasurementArray msg_array;
+    bluerov_sim::RangeMeasurementArray msg_array;
     msg_array.measurements.clear();
     msg_array.header.stamp = ros::Time::now();
     msg_array.header.frame_id = "map";
@@ -154,28 +154,28 @@ void RangesPlugin::OnUpdate(const common::UpdateInfo &) {
     // tag 1
     ignition::math::Vector3d sensor_to_tag_1 = pos_tag_1_ - pos_sensor;
     if (IsDetected(sensor_to_tag_1, body_x_axis)) {
-      range_sensor::RangeMeasurement msg = GetRangeMsg(1, sensor_to_tag_1);
+      bluerov_sim::RangeMeasurement msg = GetRangeMsg(1, sensor_to_tag_1);
       msg_array.measurements.push_back(msg);
     }
 
     // tag 2
     ignition::math::Vector3d sensor_to_tag_2 = pos_tag_2_ - pos_sensor;
     if (IsDetected(sensor_to_tag_2, body_x_axis)) {
-      range_sensor::RangeMeasurement msg = GetRangeMsg(2, sensor_to_tag_2);
+      bluerov_sim::RangeMeasurement msg = GetRangeMsg(2, sensor_to_tag_2);
       msg_array.measurements.push_back(msg);
     }
 
     // tag 3
     ignition::math::Vector3d sensor_to_tag_3 = pos_tag_3_ - pos_sensor;
     if (IsDetected(sensor_to_tag_3, body_x_axis)) {
-      range_sensor::RangeMeasurement msg = GetRangeMsg(3, sensor_to_tag_3);
+      bluerov_sim::RangeMeasurement msg = GetRangeMsg(3, sensor_to_tag_3);
       msg_array.measurements.push_back(msg);
     }
 
     // tag 4
     ignition::math::Vector3d sensor_to_tag_4 = pos_tag_4_ - pos_sensor;
     if (IsDetected(sensor_to_tag_4, body_x_axis)) {
-      range_sensor::RangeMeasurement msg = GetRangeMsg(4, sensor_to_tag_4);
+      bluerov_sim::RangeMeasurement msg = GetRangeMsg(4, sensor_to_tag_4);
       msg_array.measurements.push_back(msg);
     }
 
@@ -208,9 +208,9 @@ bool RangesPlugin::IsDetected(ignition::math::Vector3d sensor_to_tag,
   return is_visible && is_not_dropped;
 }
 
-range_sensor::RangeMeasurement RangesPlugin::GetRangeMsg(
+bluerov_sim::RangeMeasurement RangesPlugin::GetRangeMsg(
     int id, ignition::math::Vector3d sensor_to_tag) {
-  range_sensor::RangeMeasurement msg;
+  bluerov_sim::RangeMeasurement msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "map";
   msg.id = id;

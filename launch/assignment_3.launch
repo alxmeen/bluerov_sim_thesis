@@ -24,7 +24,7 @@
     </include>
 
     <!--Our Range Sensor Package that publishes distances to tags -->
-    <include file="$(find range_sensor)/launch/range_sensor.launch">
+    <include file="$(find bluerov_sim)/launch/range_sensor.launch">
     </include>
 
 </launch>

@@ -17,8 +17,9 @@
     <depend>roscpp</depend>
     <depend>python-pygame</depend>
     <depend>std_msgs</depend>
-    <depend>range_sensor</depend>
-
+    <depend>apriltag_ros</depend>
+    <depend>geometry_msgs</depend>
+ 
     <!-- <exec_depend>gazebo_ros</exec_depend> -->
 
     <!-- The export tag contains other, unspecified, tags -->
