@@ -92,7 +92,7 @@ void RangesPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf) {
       boost::bind(&RangesPlugin::OnUpdate, this, _1));
 
   ranges_pub_ = node_handle_->advertise<bluerov_sim::RangeMeasurementArray>(
-      ranges_topic_, 1);
+      namespace_ + "/" + ranges_topic_, 1);
 
   initialized_ = false;
   tag_axis_ = ignition::math::Vector3d(0.0, 1.0, 0.0);

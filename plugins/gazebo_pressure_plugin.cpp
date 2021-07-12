@@ -48,8 +48,9 @@ void PressurePlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf) {
   update_connection_ = event::Events::ConnectWorldUpdateBegin(
       boost::bind(&PressurePlugin::OnUpdate, this, _1));
 
+
   pressure_pub_ =
-      node_handle_->advertise<sensor_msgs::FluidPressure>(pressure_topic_, 1);
+      node_handle_->advertise<sensor_msgs::FluidPressure>(namespace_ + "/" + pressure_topic_, 1);
 }
 
 void PressurePlugin::OnUpdate(const common::UpdateInfo &) {
