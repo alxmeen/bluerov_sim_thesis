@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(bluerov_sim)
 
 
@@ -29,6 +29,14 @@ generate_messages(
     DEPENDENCIES
     std_msgs
     geometry_msgs
+)
+
+catkin_install_python(PROGRAMS 
+  nodes/keyboard_control.py
+  nodes/mixer.py
+  nodes/range_sensor_node.py
+  nodes/rviz_visualizer.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 link_directories(${GAZEBO_LIBRARY_DIRS})
