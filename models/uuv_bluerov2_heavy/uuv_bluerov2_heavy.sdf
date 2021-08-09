@@ -57,6 +57,17 @@
             </axis>
         </joint>
 
+        <!-- GPS -->
+        <include>
+            <uri>model://gps</uri>
+            <pose>0 0 0 0 0 0</pose>
+            <name>gps</name>
+        </include>
+        <joint name='gps_joint' type='fixed'>
+            <child>gps::link</child>
+            <parent>base_link</parent>
+        </joint>
+
         <link name="range_sensor_link">
             <pose>0.2 0 0.1 0 0 0</pose>
             <inertial>
