@@ -11,7 +11,6 @@ class AutoArmNode():
     """
     def __init__(self):
         rospy.init_node("auto_arm")
-        rospy.logfatal("test")
         self.arm_vehicle()
 
     def arm_vehicle(self):
