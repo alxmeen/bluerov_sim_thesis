@@ -36,6 +36,7 @@ catkin_install_python(PROGRAMS
   nodes/mixer.py
   nodes/range_sensor_node.py
   nodes/rviz_visualizer.py
+  nodes/auto_arm_node.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

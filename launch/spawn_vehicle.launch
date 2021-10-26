@@ -26,16 +26,19 @@
     <param command="$(arg cmd)" name="model_description" />
     <!-- PX4 SITL -->
     <arg name="px4_command_arg1" value="" />
-    <node name="sitl_$(arg ID)" pkg="px4" type="px4" args="$(find px4)/build/px4_sitl_default/etc -s etc/init.d-posix/rcS $(arg px4_command_arg1) -i $(arg ID) -w sitl_$(arg vehicle)_$(arg ID)"/>
+    <node name="sitl_$(arg ID)" pkg="px4" type="px4" args="$(find px4)/build/px4_sitl_default/etc -s etc/init.d-posix/rcS $(arg px4_command_arg1) -i $(arg ID) -w sitl_$(arg vehicle)_$(arg ID)" />
     <!-- spawn vehicle -->
     <node name="$(arg vehicle)_$(arg ID)_spawn" output="screen" pkg="gazebo_ros" type="spawn_model" args="-sdf -param model_description -model $(arg vehicle)_$(arg ID) -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)" />
 
     <!-- MAVROS -->
     <include file="$(find mavros)/launch/px4.launch">
         <arg name="fcu_url" value="$(arg fcu_url)" />
-        <arg name="gcs_url" value=""/>
+        <arg name="gcs_url" value="" />
         <arg name="tgt_system" value="$(eval 1 + arg('ID'))" />
         <arg name="tgt_component" value="1" />
         <arg name="log_output" value="log" />
     </include>
+
+    <!-- The vehicle needs to be armed to actuate its thrusters. -->
+    <node pkg="bluerov_sim" type="auto_arm_node.py" name="auto_arm" />
 </launch>

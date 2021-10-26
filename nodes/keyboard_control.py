@@ -4,8 +4,7 @@ import rospy
 import pygame
 import rospkg
 import os
-from bluerov_sim.msg import ActuatorCommands
-from mavros_msgs.srv import CommandBool
+from std_msgs.msg import Float64
 
 
 class Text(object):
@@ -60,9 +59,10 @@ class TextGrid(object):
         for row in range(layout[0]):
             row_list = []
             for col in range(layout[1]):
-                row_list.append(Text("dejavusansmono", size, "{}x{}".format(row, col)))
+                row_list.append(
+                    Text("dejavusansmono", size, "{}x{}".format(row, col)))
             self.texts.append(row_list)
-            
+
         self.padding = padding
         self.font_size = size
         self.screen = pygame.display.get_surface()
@@ -121,8 +121,6 @@ class KeyboardControlNode():
         pygame.mixer.quit()
         rospy.init_node(name)
 
-        self.arm_vehicle()
-
         self.thrust = 0.0
         self.thrust_stepsize = 0.1
         self.thrust_scaler = 0.4
@@ -142,21 +140,16 @@ class KeyboardControlNode():
 
         self.controls = self.init_controls()
 
-        self.actuator_pub = rospy.Publisher("mixer/actuator_commands",
-                                            ActuatorCommands,
-                                            queue_size=1)
-
-    def arm_vehicle(self):
-        rospy.wait_for_service("mavros/cmd/arming")
-        arm = rospy.ServiceProxy("mavros/cmd/arming", CommandBool)
-        while not arm(True).success:
-            rospy.logwarn_throttle(1, "Could not arm vehicle. Keep trying.")
-        rospy.loginfo("Armed successfully.")
-
-    def disarm_vehicle(self):
-        rospy.wait_for_service("mavros/cmd/arming")
-        arm = rospy.ServiceProxy("mavros/cmd/arming", CommandBool)
-        arm(False)
+        self.roll_pub = rospy.Publisher("roll", Float64, queue_size=1)
+        self.pitch_pub = rospy.Publisher("pitch", Float64, queue_size=1)
+        self.yaw_pub = rospy.Publisher("yaw", Float64, queue_size=1)
+        self.thrust_pub = rospy.Publisher("thrust", Float64, queue_size=1)
+        self.vertical_thrust_pub = rospy.Publisher("vertical_thrust",
+                                                   Float64,
+                                                   queue_size=1)
+        self.lateral_thrust_pub = rospy.Publisher("lateral_thrust",
+                                                  Float64,
+                                                  queue_size=1)
 
     def init_display(self):
         screen = pygame.display.set_mode(self.WINDOW_SIZE, self.DISPLAY_FLAGS)
@@ -404,13 +397,10 @@ class KeyboardControlNode():
                 rospy.signal_shutdown("Quitting")
 
     def publish_message(self):
-        msg = ActuatorCommands()
-        msg.header.stamp = rospy.Time.now()
-        msg.thrust = self.thrust
-        msg.yaw = self.yaw_rate
-        msg.lateral_thrust = self.lateral_thrust
-        msg.vertical_thrust = self.vertical_thrust
-        self.actuator_pub.publish(msg)
+        self.thrust_pub.publish(Float64(self.thrust))
+        self.vertical_thrust_pub.publish(Float64(self.vertical_thrust))
+        self.lateral_thrust_pub.publish(Float64(self.lateral_thrust))
+        self.yaw_pub.publish(Float64(self.yaw_rate))
 
 
 def main():

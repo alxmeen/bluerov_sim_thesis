@@ -1,14 +1,17 @@
 <launch>
     <arg name="est" default="ekf2" />
     <arg name="vehicle" default="uuv_bluerov2_heavy" />
+    <arg name="vehicle_name" default="bluerov" />
 
-    <include file="$(find bluerov_sim)/launch/gazebo_base.launch"/>
+    <include file="$(find bluerov_sim)/launch/gazebo_base.launch" />
+    <group ns="$(arg vehicle_name)">
 
-    <include file="$(find bluerov_sim)/launch/spawn_vehicle.launch">
-        <arg name="z" value="-0.2"/>
-    </include>
+        <include file="$(find bluerov_sim)/launch/spawn_vehicle.launch">
+            <arg name="z" value="-0.2" />
+        </include>
 
-    <node name="keyboard" pkg="bluerov_sim" type="keyboard_control.py" output="screen" />
-    <node name="mixer" pkg="bluerov_sim" type="mixer.py" />
+        <node name="keyboard" pkg="bluerov_sim" type="keyboard_control.py" output="screen" />
+        <node name="mixer" pkg="bluerov_sim" type="mixer.py" />
+    </group>
 
 </launch>

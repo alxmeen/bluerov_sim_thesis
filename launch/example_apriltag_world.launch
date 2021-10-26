@@ -1,4 +1,5 @@
 <launch>
+    <arg name="vehicle_name" default="bluerov" />
     <!-- Vehicle spawn position so that tags are seen -->
     <arg name="x" default="0.7" />
     <arg name="y" default="2.0" />
@@ -11,13 +12,15 @@
     <include file="$(find bluerov_sim)/launch/gazebo_tags.launch" />
 
     <!-- spawn BlueROV model -->
-    <include file="$(find bluerov_sim)/launch/spawn_vehicle.launch">
-        <arg name="camera" value="$(arg camera)" />
-        <arg name="x" value="$(arg x)" />
-        <arg name="y" value="$(arg y)" />
-        <arg name="z" value="$(arg z)" />
-        <arg name="R" default="$(arg R)" />
-        <arg name="P" default="$(arg P)" />
-        <arg name="Y" default="$(arg Y)" />
-    </include>
+    <group ns="$(arg vehicle_name)">
+        <include file="$(find bluerov_sim)/launch/spawn_vehicle.launch">
+            <arg name="camera" value="$(arg camera)" />
+            <arg name="x" value="$(arg x)" />
+            <arg name="y" value="$(arg y)" />
+            <arg name="z" value="$(arg z)" />
+            <arg name="R" default="$(arg R)" />
+            <arg name="P" default="$(arg P)" />
+            <arg name="Y" default="$(arg Y)" />
+        </include>
+    </group>
 </launch>
