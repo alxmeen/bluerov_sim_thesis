@@ -17,7 +17,6 @@ class AutoArmNode():
         rospy.wait_for_service("mavros/cmd/arming")
         rospy.sleep(0.0000001)
         nodes = rosnode.get_node_names()
-        rospy.logfatal(nodes)
         if "/gazebo" not in nodes:
             rospy.loginfo("Not running in simulation. Auto arming disabled.")
             return
