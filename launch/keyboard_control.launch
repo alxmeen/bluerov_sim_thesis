@@ -1,6 +1,4 @@
 <launch>
-    <arg name="est" default="ekf2" />
-    <arg name="vehicle" default="uuv_bluerov2_heavy" />
     <arg name="vehicle_name" default="bluerov" />
 
     <include file="$(find bluerov_sim)/launch/gazebo_base.launch" />
