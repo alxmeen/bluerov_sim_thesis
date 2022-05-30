@@ -791,6 +791,7 @@
                     <alwaysOn>1</alwaysOn>
                     <updateRate>0.0</updateRate>
                     <cameraName>front_camera</cameraName>
+                    <frameName>bluerov/front_camera/camera_frame</frameName>
                     <imageTopicName>image_raw</imageTopicName>
                     <distortionK1>0.0</distortionK1>
                     <distortionK2>0.0</distortionK2>
