@@ -45,6 +45,8 @@ class AltitudeHold():
             curr_alt = self.get_alt()
             err = self.setpoint - curr_alt
 
-            self.pro_x = self.Kp * err
-            self.int_x = self.Ki * err * dt
-            self.int_x = self.clamp()
+            self.prop = self.Kp * err
+            self.int = self.Ki * err * dt
+            self.int = self.clamp()
+
+            self.der = self.Kd * err / dt
