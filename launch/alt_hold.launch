@@ -1,0 +1,15 @@
+<launch>
+    <arg name="vehicle_name" default="bluerov" />
+
+    <include file="$(find bluerov_sim)/launch/gazebo_base.launch" />
+    <group ns="$(arg vehicle_name)">
+
+        <include file="$(find bluerov_sim)/launch/spawn_vehicle.launch">
+            <arg name="z" value="-0.2" />
+        </include>
+
+        <node name="alt_hold" pkg="bluerov_sim" type="altitude_hold.py" output="screen" />
+        <node name="mixer" pkg="bluerov_sim" type="mixer.py" />
+    </group>
+
+</launch>
