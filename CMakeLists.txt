@@ -33,6 +33,7 @@ generate_messages(
 
 catkin_install_python(PROGRAMS 
   nodes/keyboard_control.py
+  nodes/altitude_hold.py
   nodes/mixer.py
   nodes/range_sensor_node.py
   nodes/rviz_visualizer.py
