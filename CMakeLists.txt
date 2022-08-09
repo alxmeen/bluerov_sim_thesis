@@ -8,8 +8,11 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   geometry_msgs
+  actionlib_msgs
   message_generation
   apriltag_ros
+  
+
 )
 
 add_compile_options(-std=c++14)
@@ -25,10 +28,16 @@ add_message_files(
     RangeMeasurementArray.msg
 )
 
+add_action_files(
+  FILES
+  Waypoint.action
+)
+
 generate_messages(
     DEPENDENCIES
     std_msgs
     geometry_msgs
+    actionlib_msgs
 )
 
 catkin_install_python(PROGRAMS 
@@ -38,6 +47,8 @@ catkin_install_python(PROGRAMS
   nodes/range_sensor_node.py
   nodes/rviz_visualizer.py
   nodes/auto_arm_node.py
+  nodes/WayPoint_server.py
+  nodes/LawnMow.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -52,8 +63,9 @@ catkin_package(
   DEPENDS 
       roscpp 
       gazebo_ros
+      rospy
   CATKIN_DEPENDS 
-    message_runtime
+    roscpp rospy std_msgs geometry_msgs message_runtime
 )
 
 add_library(gazebo_pressure_plugin plugins/gazebo_pressure_plugin.cpp)

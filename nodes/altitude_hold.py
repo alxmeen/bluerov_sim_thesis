@@ -20,7 +20,7 @@ class PIDController():
         self.Ki = 0
         self.Kd = 0
         self.maximum_distance_threshold = 5
-        self.minimum_error_threshold = 0.01
+        self.minimum_error_threshold = 0.1
         self.sample_time = 0.01
         self.curr_alt = 0.0
         self.int_x = 0
@@ -61,7 +61,7 @@ class PIDController():
         return self.curr_pose
     
     def set_WP(self, data):
-        self.setpoint = data.data
+        self.setpoint = data
     
     def get_WP(self):
         return self.setpoint
@@ -74,6 +74,7 @@ class PIDController():
     def do_work(self, timer):
 
         dt = 0.01
+        now = self.get_current_time()
         pid_out_x = 0
         pid_out_y = 0
         pid_out_z = 0

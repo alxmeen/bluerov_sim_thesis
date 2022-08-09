@@ -1,0 +1,8 @@
+#goal 
+geometry_msgs/Pose waypoint
+---
+#result 
+bool success
+---
+#feedback
+geometry_msgs/Pose current_pose
