@@ -8,7 +8,7 @@
             <arg name="z" value="-0.2" />
         </include>
 
-        <node name="alt_hold" pkg="bluerov_sim" type="altitude_hold.py" output="screen" />
+        <node name="pid_node" pkg="bluerov_sim" type="altitude_hold.py" output="screen" />
         <node name="mixer" pkg="bluerov_sim" type="mixer.py" />
         <node name="lawnmower" pkg="bluerov_sim" type="LawnMow.py" />
         <node name="waypoint_server_node" pkg="bluerov_sim" type="WayPoint_server.py" />
